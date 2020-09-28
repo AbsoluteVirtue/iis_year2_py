@@ -26,7 +26,7 @@ class Coordinates:
     @classmethod
     def from_string(cls, string):
         desc, x, y = string.split(',')
-        return cls(desc, x, y)
+        return cls(x, y, desc)
 
 
 class Coordinates3D(Coordinates):

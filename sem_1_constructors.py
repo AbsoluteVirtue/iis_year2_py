@@ -27,50 +27,51 @@ class Coordinates:
 if __name__ == '__main__':
 
     # прямой вызов конструктора по умолчанию
-    c1 = Coordinates()
+    coord1 = Coordinates()
 
     # прямой вызов мутаторов (setter)
-    c1.x = 1
-    c1.y = 2
-    c1.desc = "hello"
+    coord1.x = 1
+    coord1.y = 2
+    coord1.desc = "hello"
 
     # вывод состояния объекта через наследуемый метод
-    print(c1.__dict__)
+    print(coord1.__dict__)
 
-    # прямой выхов параметрического конструктора
-    c2 = Coordinates(10, 20, "world")
+    # прямой вызов параметрического конструктора
+    coord2 = Coordinates(10, 20, "world")
 
     # вывод состояния объекта через свой метод явно
-    print(Coordinates.print(c2))
+    print(Coordinates.print(coord2))
 
     # присваивание по ссылке (shallow copy)
-    c3 = c2
+    coord3 = coord2
 
     # вывод состояния объекта через перегруженный метод __str__ неявно
-    print(c3)
+    print(coord3)
 
     # изменение состояния по ссылке
-    c3.desc = "test mod state"
+    coord3.desc = "test mod state"
 
     # инициализация массива объектов
-    array = [c1, c2, c3]
+    arr = [coord1, coord2, coord3]
 
     # вывод элементов массива, используя интерфейс класса list
-    for c in array:
-        print("-->%s" % c)
+    for coord in arr:
+        print("-->%s" % coord)
 
     # альтернативный "конструктор" для инициализации объекта из строки
-    c4 = Coordinates.from_string("Test,100,200")
+    coord4 = Coordinates.from_string("test,100,200")
 
     # присваивание по значению (deep copy)
-    c3 = copy.deepcopy(c4)
+    coord5 = copy.deepcopy(coord4)
 
     # изменение состояния по значению
-    c3.desc = "world"
+    coord5.desc = "world"
 
     # добавление элемента в массив
-    array.append(c4)
+    arr.append(coord4)
+    arr.append(coord5)
 
     # вывод элементов массива, используя итератор enumerate
-    for i, c in enumerate(array):
-        print("%s->%s" % (i + 1, c))
+    for i, coord in enumerate(arr):
+        print("%s->%s" % (i + 1, coord))
