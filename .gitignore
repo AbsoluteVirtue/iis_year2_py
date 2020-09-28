@@ -1,0 +1,46 @@
+######### Python
+*.pyc
+
+######### C
+*.o
+*.so
+
+######### MacOS
+.DS_Store
+
+######### Windows
+ehthumbs.db
+Icon?
+Thumbs.db
+
+######### Eclipse
+.project
+.pydevproject
+.settings
+
+######### Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+
+######### Simpals
+my.ini
+*.pid
+*.log
+i18n/*.po~
+
+#################Frontend##########
+node_modules
+
+###### PyCharm #######
+.idea
+
+###### Visual Studio Code #######
+.vscode
+.history
+
+###### Python mati ego cache #######
+.cache
+
+###### Other #######
+scripts_ignore.py
