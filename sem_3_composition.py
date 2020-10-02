@@ -35,26 +35,32 @@ class Coordinates3D(Coordinates):
 
     def __init__(self, x=0, y=0, z=0, desc=""):
         super().__init__(x, y, desc)
-        Coordinates.decr_num_of_coord()
 
         self.z = z
-        Coordinates3D.incr_num_of_coord()
 
 
 class Point:
 
     def __init__(self, coord=None):
-        if not coord.__dict__.get('z'):
+        if coord and not coord.__dict__.get('z'):
             self.coord = coord
         else:
             self.coord = Coordinates()
 
+    def __add__(self, other):
+        return Point(Coordinates(self.coord.x + other.coord.x,
+                                 self.coord.y + other.coord.y))
+
+    def __str__(self):
+        return "{}, {}".format(self.coord.x, self.coord.y)
+
 
 if __name__ == '__main__':
 
-    s = Coordinates3D(1.1, 2.2, 3.3, "hello 3D")
-    print(s)
     # print(help(Coordinates3D))
 
-    p = Point(s)
-    print(p.coord)
+    s = Coordinates3D(1.1, 2.2, 3.3, "hello 3D")
+    print(s)
+
+    p1 = Point(s)
+    print(p1.coord)

@@ -9,6 +9,14 @@ class Coordinates:
         self.y = y
         self.desc = desc
 
+    # перегрузка специального метода, возвращающего длину объекта
+    def __len__(self):
+        return self.x + self.y
+
+    # перегрузка специального метода вывода (например, для отладки)
+    def __repr__(self):
+        return 'Coordinates({}, {}, "{}")'.format(self.x, self.y, self.desc)
+
     # перегрузка метода вывода
     def __str__(self):
         return self.print()
