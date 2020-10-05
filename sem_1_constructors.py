@@ -13,6 +13,10 @@ class Coordinates:
     def __len__(self):
         return self.x + self.y
 
+    # перегрузка специального метода, возвращающего сумму двух объектов
+    def __add__(self, other):
+        return Coordinates(x=self.x + other.x, y=self.y + other.y)
+
     # перегрузка специального метода вывода (например, для отладки)
     def __repr__(self):
         return 'Coordinates({}, {}, "{}")'.format(self.x, self.y, self.desc)
@@ -29,7 +33,7 @@ class Coordinates:
     @classmethod
     def from_string(cls, string):
         _desc, _x, _y = string.split(',')
-        return cls(x=_x, y=_y, desc=_desc)
+        return cls(x=int(_x), y=int(_y), desc=_desc)
 
 
 if __name__ == '__main__':
@@ -79,6 +83,11 @@ if __name__ == '__main__':
     # добавление элемента в массив
     arr.append(coord4)
     arr.append(coord5)
+
+    # перегруженная операция сложения двух объектов
+    coord6 = coord4 + coord5
+
+    arr.append(coord6)
 
     # вывод элементов массива, используя итератор enumerate
     for i, coord in enumerate(arr):
