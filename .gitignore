@@ -43,4 +43,6 @@ node_modules
 .cache
 
 ###### Other #######
+Pipfile
+Pipfile.lock
 scripts_ignore.py

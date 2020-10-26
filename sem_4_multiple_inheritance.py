@@ -6,6 +6,8 @@ import logging
 import os.path
 from aiohttp import web
 
+from db_mock.students_mock import database
+
 
 _PORT = 9898
 
@@ -27,13 +29,8 @@ class Home(Base):
 
     async def get(self):
         data = {
-            'data': [{
-                'name': 'Ivan Petrov',
-                'group': 'MI-192',
-                'grade': '7.9',
-                'status': 'public',
-            }],
-            'count': 1,
+            'data': database.students.find(),
+            'count': database.students.count(),
         }
         response = aiohttp_jinja2.render_template('home.html', self.request, context=data)
         return response
