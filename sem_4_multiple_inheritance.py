@@ -14,15 +14,10 @@ _PORT = 9898
 
 class Base(web.View):
 
-    async def _get(self, url):
-        async with self.request.app['client'].get(url) as resp:
-            assert resp.status == 200
-            return await resp.text()
-
-    # async def get(self):
-    #     return web.json_response({
-    #         'list': [],
-    #     }, status=200)
+    async def get(self):
+        return web.json_response({
+            'list': [],
+        }, status=200)
 
 
 class Home(Base):
