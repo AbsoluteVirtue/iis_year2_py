@@ -1,29 +1,20 @@
-import datetime
+import aiohttp
+import aiohttp_jinja2
+import asyncio
+import jinja2
+import os
+from aiohttp import web
 
 
-class MyException(BaseException):
-
-    def __init__(self, msg="error", code=0):
-        self.msg = msg
-        self.code = code
-        self.t = datetime.datetime.now()
-
-    def __str__(self):
-        return "%s, %s: %s" % (self.t, self.code, self.msg)
-
-
-def test_f():
-    print("test")
-    raise MyException("exception in test")
+class List:
+    pass
 
 
 if __name__ == '__main__':
+    app = web.Application(loop=asyncio.get_event_loop())
 
-    try:
-        test_f()
-    except Exception as ex:
-        print(ex)
-    except MyException as ex:
-        print(ex)
+    app['client'] = aiohttp.ClientSession()
+    app.router.add_view(r'/', handler=List)
 
-    print("safe return")
+    aiohttp_jinja2.setup(app, loader=jinja2.FileSystemLoader(os.path.abspath('templates')))
+    web.run_app(app, host='localhost', port=9980)
