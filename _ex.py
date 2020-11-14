@@ -3,7 +3,7 @@ import requests
 
 if __name__ == '__main__':
     result = []
-    for i in range(1, int(12000/12)):
+    for i in range(1, 11):
         try:
             res = requests.get((
                 'https://www.kickstarter.com/discover/advanced'
