@@ -1,12 +1,10 @@
 import students
 
 
-def calc(name, first, second, attendance, *grades):
+def calc(first, second, attendance, *grades):
     """
         (eval 1 * 0.15) + (eval 2 * 0.15) + (median labs * 0.15) + (practice * 0.15) = 60% of final grade
     """
-    print(f'{name}')
-
     def median(*args):
         return sum(args) / len(args)
 
@@ -37,6 +35,7 @@ def calc(name, first, second, attendance, *grades):
     result['soft'] = {
         'labs': labs,
         'total': total,
+        'recalc_second': second,
         'final': total * 0.6,
     }
 
@@ -44,6 +43,18 @@ def calc(name, first, second, attendance, *grades):
 
 
 if __name__ == '__main__':
-    calc("bogaciov", 80, 87.5, 100, *(100, 85, 80, 90))
-    print(f'lab: {labs:.2f}, att 1: {first:.2f}, att 2: {second:.2f}, sem: {attendance:.2f} = {total:.2f} ({final:.2f}|{final + 40:.2f})')
-    print(f'lab: {labs:.2f}, att 1: {first:.2f}, att 2: {second:.2f}, sem: {attendance:.2f} = {total:.2f} ({final:.2f}|{final + 40:.2f})')
+    for student in students.YEAR_ONE_HARD:
+        _name, _group, _first, _second, _attendance, *grades = student
+        # first, second, attendance, *grades
+        res = calc(_first, _second, _attendance, *grades)
+        print(f'{_name} ({_group})')
+        print((f'lab: {res["hard"]["labs"]:.2f}, '
+               f'att 1: {_first:.2f}, '
+               f'att 2: {_second:.2f}, '
+               f'sem: {_attendance:.2f} = '
+               f'{res["hard"]["total"]:.2f} ({res["hard"]["final"]:.2f}|{res["hard"]["final"] + 40:.2f})'))
+        print((f'lab: {res["soft"]["labs"]:.2f}, '
+               f'att 1: {_first:.2f}, '
+               f'att 2: {res["soft"]["recalc_second"]:.2f}, '
+               f'sem: {_attendance:.2f} = '
+               f'{res["soft"]["total"]:.2f} ({res["soft"]["final"]:.2f}|{res["soft"]["final"] + 40:.2f})'))
