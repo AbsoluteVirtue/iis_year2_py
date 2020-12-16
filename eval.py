@@ -47,8 +47,8 @@ def calc(first, second, attendance, *grades):
     return result
 
 
-def print_out(with_projection=True):
-    for _name, _group, _first, _second, _attendance, *_grades in students.YEAR_ONE_HARD:
+def print_out(student_list, with_projection=True):
+    for _name, _group, _first, _second, _attendance, *_grades in student_list:
         _res = calc(_first, _second, _attendance, *_grades)
         print(f'{_name} ({_group})')
         print((f'\tlab: {_res["hard"]["labs"]:.2f}, '
@@ -64,7 +64,7 @@ def print_out(with_projection=True):
                    f'{_res["soft"]["total"]:.2f} ({_res["soft"]["final"]:.2f}|{_res["soft"]["final"] + 40:.2f})'))
 
 
-if __name__ == '__main__':
+def file_out(student_list):
     wb = xlwt.Workbook()
     ws = wb.add_sheet('Grades')
 
@@ -80,8 +80,7 @@ if __name__ == '__main__':
 
     row = 1
     i = 0
-    for __name, __group, __first, __second, __attendance, *__grades in students.YEAR_ONE_HARD:
-
+    for __name, __group, __first, __second, __attendance, *__grades in student_list:
         __res = calc(__first, __second, __attendance, *__grades)
 
         ws.write(row, 0, i + 1)
@@ -98,3 +97,8 @@ if __name__ == '__main__':
         i += 1
 
     wb.save("grades.xlsx")
+
+
+if __name__ == '__main__':
+    # file_out()
+    print_out(students.YEAR_ONE_PARTIAL, False)
