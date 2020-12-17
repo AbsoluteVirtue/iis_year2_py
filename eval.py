@@ -3,9 +3,6 @@ import xlwt
 import students
 
 
-NUMBER_OF_GRADES_TO_CONSIDER = 3
-
-
 def calc(first, second, attendance, *grades):
     """
         (eval 1 * 0.15) + (eval 2 * 0.15) + (median labs * 0.15) + (practice * 0.15) = 60% of final grade
@@ -13,10 +10,10 @@ def calc(first, second, attendance, *grades):
     def median(*args):
         return sum(args) / len(args)
 
-    def max_(no, *args):
+    def max_(no_of_grades_to_consider, *args):
         check = list(*args)
         res = []
-        while check and len(res) != no:
+        while check and len(res) != no_of_grades_to_consider:
             m = max(*check)
             res.append(m)
             check.remove(m)
@@ -34,7 +31,7 @@ def calc(first, second, attendance, *grades):
         },
     }
 
-    second = median(*max_(NUMBER_OF_GRADES_TO_CONSIDER, grades))
+    second = median(*max_(3, grades))
     total = median(first, second, attendance, labs)
 
     result['soft'] = {
@@ -49,19 +46,21 @@ def calc(first, second, attendance, *grades):
 
 def print_out(student_list, with_projection=True):
     for _name, _group, _first, _second, _attendance, *_grades in student_list:
+
         _res = calc(_first, _second, _attendance, *_grades)
+
         print(f'{_name} ({_group})')
         print((f'\tlab: {_res["hard"]["labs"]:.2f}, '
                f'att 1: {_first:.2f}, '
                f'att 2: {_second:.2f}, '
                f'sem: {_attendance:.2f} = '
-               f'{_res["hard"]["total"]:.2f} ({_res["hard"]["final"]:.2f}|{_res["hard"]["final"] + 40:.2f})'))
+               f'{_res["hard"]["total"]:.2f}'))
         if with_projection:
             print((f'\tlab: {_res["soft"]["labs"]:.2f}, '
                    f'att 1: {_first:.2f}, '
                    f'att 2: {_res["soft"]["recalc_second"]:.2f}, '
                    f'sem: {_attendance:.2f} = '
-                   f'{_res["soft"]["total"]:.2f} ({_res["soft"]["final"]:.2f}|{_res["soft"]["final"] + 40:.2f})'))
+                   f'{_res["soft"]["total"]:.2f} ({_res["hard"]["final"]:.2f}|{_res["hard"]["final"] + 40:.2f})'))
 
 
 def file_out(student_list):
@@ -101,4 +100,4 @@ def file_out(student_list):
 
 if __name__ == '__main__':
     # file_out()
-    print_out(students.YEAR_ONE_PARTIAL, False)
+    print_out(students.YEAR_ONE_F, False)
