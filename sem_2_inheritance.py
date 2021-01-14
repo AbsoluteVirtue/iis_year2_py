@@ -1,3 +1,18 @@
+import collections
+import logging
+
+
+class LoggingDict(dict):
+
+    def __setitem__(self, key, value):
+        logging.info('Set %s to %s' % (key, value))
+        super().__setitem__(key, value)
+
+
+class LoggingOrderedDict(LoggingDict, collections.OrderedDict):
+    # resolution order: LoggingDict, OrderedDict, dict, object
+    pass
+
 
 class Coordinates:
 
@@ -46,3 +61,5 @@ if __name__ == '__main__':
     s = Coordinates3D(1.1, 2.2, 3.3, "hello 3D")
     print(s)
     print(help(Coordinates3D))
+
+    print(LoggingOrderedDict.__mro__)

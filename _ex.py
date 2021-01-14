@@ -1,7 +1,13 @@
-import requests
 
 
 if __name__ == '__main__':
-    v = dict(name="Nick", status="healthy", last_pos="uni", pos="uni")
-    print(v.get("surname", 'no-name'))
-    print(v['name'])
+    run = True
+    source = ("Непорядок в дебрях школ, под сводами алгебр и геометрий. "
+              "Надо школу взять за ушко, промыть и высушить на ветре.")
+    words = source.split(" ")
+    i = 0
+    while run:
+        if words[i].startswith("а"):
+            print(words[i])
+            run = False
+        i = i + 1

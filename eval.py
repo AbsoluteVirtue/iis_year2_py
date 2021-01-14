@@ -99,5 +99,5 @@ def file_out(student_list):
 
 
 if __name__ == '__main__':
-    # file_out()
-    print_out(students.YEAR_ONE_F, False)
+    # file_out(students.YEAR_ONE_F)
+    print_out(students.YEAR_ONE_R, False)
