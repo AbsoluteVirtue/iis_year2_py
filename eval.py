@@ -3,6 +3,9 @@ import xlwt
 import students
 
 
+CONSIDER = 5
+
+
 def calc(first, second, attendance, *grades):
     """
         (eval 1 * 0.15) + (eval 2 * 0.15) + (median labs * 0.15) + (practice * 0.15) = 60% of final grade
@@ -31,7 +34,7 @@ def calc(first, second, attendance, *grades):
         },
     }
 
-    second = median(*max_(3, grades))
+    second = median(*max_(CONSIDER, grades))
     total = median(first, second, attendance, labs)
 
     result['soft'] = {
@@ -100,4 +103,4 @@ def file_out(student_list):
 
 if __name__ == '__main__':
     # file_out(students.YEAR_ONE_F)
-    print_out(students.YEAR_ONE_R, False)
+    print_out(students.YEAR_TWO_F, False)
