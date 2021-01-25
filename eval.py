@@ -3,7 +3,7 @@ import xlwt
 import students
 
 
-CONSIDER = 5
+CONSIDER = 4
 
 
 def calc(first, second, attendance, *grades):
@@ -102,5 +102,4 @@ def file_out(student_list):
 
 
 if __name__ == '__main__':
-    # file_out(students.YEAR_ONE_F)
-    print_out(students.YEAR_TWO_F, False)
+    print_out(students.YEAR_ONE_R, False)
