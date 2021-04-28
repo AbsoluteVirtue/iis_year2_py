@@ -1,13 +1,17 @@
+import traceback
+from db_mock import students_mock as students
+
+
+def test(collection):
+    return students.database.find(collection)
+
+# re-raise / re-throw
 
 
 if __name__ == '__main__':
-    run = True
-    source = ("Непорядок в дебрях школ, под сводами алгебр и геометрий. "
-              "Надо школу взять за ушко, промыть и высушить на ветре.")
-    words = source.split(" ")
-    i = 0
-    while run:
-        if words[i].startswith("а"):
-            print(words[i])
-            run = False
-        i = i + 1
+
+    res, _ = test("students")
+    if res:
+        print(res)
+
+    print("exit")

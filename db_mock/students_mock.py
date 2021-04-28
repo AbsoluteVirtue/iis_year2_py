@@ -27,6 +27,18 @@ class Students:
         return len(self.find(**kwargs))
 
 
+class MyException(ZeroDivisionError):
+
+    _args = []
+    msg = "division by zero, args: %s"
+
+    def __init__(self, *args):
+        self._args = args
+
+    def __str__(self):
+        return self.msg % str(self._args)
+
+
 class Db:
 
     _collections = {
@@ -39,8 +51,8 @@ class Db:
 
     def find(self, collection):
         if not self._collections.get(collection):
-            raise Exception('collection does not exist')
-        return self._collections.get(collection)
+            return None, "no such collection exists"
+        return self._collections.get(collection), None
 
 
 database = Db()
