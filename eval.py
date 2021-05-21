@@ -3,7 +3,7 @@ import xlwt
 import students
 
 
-CONSIDER = 4
+CONSIDER = None
 
 
 def calc(first, second, attendance, *grades):
@@ -17,7 +17,7 @@ def calc(first, second, attendance, *grades):
         check = list(*args)
         res = []
         while check and len(res) != no_of_grades_to_consider:
-            m = max(*check)
+            m = max(check)
             res.append(m)
             check.remove(m)
 
@@ -34,7 +34,7 @@ def calc(first, second, attendance, *grades):
         },
     }
 
-    second = median(*max_(CONSIDER, grades))
+    second = median(*max_(CONSIDER if CONSIDER else len(grades), grades))
     total = median(first, second, attendance, labs)
 
     result['soft'] = {
@@ -102,4 +102,4 @@ def file_out(student_list):
 
 
 if __name__ == '__main__':
-    print_out(students.YEAR_ONE_R, False)
+    print_out(students.YEAR_ONE_F, False)
