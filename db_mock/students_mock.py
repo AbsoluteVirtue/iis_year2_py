@@ -51,8 +51,8 @@ class Db:
 
     def find(self, collection):
         if not self._collections.get(collection):
-            return None, "no such collection exists"
-        return self._collections.get(collection), None
+            raise MyException('collection does not exist')
+        return self._collections.get(collection)
 
 
 database = Db()
